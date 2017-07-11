@@ -120,6 +120,7 @@ set nofoldenable
 set foldlevel=99
 " Enable folding with the spacebar 
 nnoremap <space> za
+nnoremap <leader>gb <C-O>  
 " 开启自动缩进，set autoindent
 set ai
 " 显示输入的命令
@@ -176,10 +177,32 @@ au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
 " Make trailing whitespace be flagged as bad.
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
+"config youcompleteme
+"设置error和warning的提示符，如果没有设置，ycm会以syntastic的  
+" g:syntastic_warning_symbol 和 g:syntastic_error_symbol 这两个为准  
+let g:ycm_error_symbol='>>'  
+let g:ycm_warning_symbol='>*'  
+"设置跳转的快捷键，可以跳转到definition和declaration  
+nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>  
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>  
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>  
+nnoremap <leader>ge :YcmDiags<CR>  
+
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_server_keep_logfiles='~/.vim/bundle/YouCompleteMe/err.log'
 let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-map <Leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"开启基于tag的补全，可以在这之后添加需要的标签路径  
+let g:ycm_collect_identifiers_from_tags_files = 1  
+"不显示开启vim时检查ycm_extra_conf文件的信息  
+let g:ycm_confirm_extra_conf=0  
+"开启语义补全  
+let g:ycm_seed_identifiers_with_syntax = 1  
+"每次重新生成匹配项，禁止缓存匹配项  
+let g:ycm_cache_omnifunc=0  
+"在注释中也可以补全  
+let g:ycm_complete_in_comments=1  
+"输入第一个字符就开始补全  
+let g:ycm_min_num_of_chars_for_completion=1  
 
 let python_highlight_all=1
 
@@ -189,11 +212,11 @@ set backspace=indent,eol,start
 nmap <silent> <Leader>sw :FSHere<cr>
 
 " 使用Taglist显示符号/函数/标签
-"nmap <Leader>tl :TlistToggle<CR>
-"let Tlist_Show_One_File=1    "只显示当前文件的tags
-"let Tlist_WinWidth=40        "设置taglist宽度
-"let Tlist_Exit_OnlyWindow=1  "tagList窗口是最后一个窗口，则退出Vim
-"let Tlist_Use_Right_Window=1 "在Vim窗口右侧显示taglist窗口
+nmap <Leader>tl :TlistToggle<CR>
+let Tlist_Show_One_File=1    "只显示当前文件的tags
+let Tlist_WinWidth=40        "设置taglist宽度
+let Tlist_Exit_OnlyWindow=1  "tagList窗口是最后一个窗口，则退出Vim
+let Tlist_Use_Right_Window=1 "在Vim窗口右侧显示taglist窗口
 
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
 nmap <Leader>fl :NERDTreeToggle<CR>
