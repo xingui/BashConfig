@@ -1,5 +1,7 @@
 "set the runtime path to include Vundle and initialize
 filetype off
+" 关闭兼容模式
+set nocompatible
 set rtp+=~/.vim/bundle/Vundle.vim
 "set rtp+=/gpfs/mcs/data/users/xingui_zeng/tools/vim/usr/bundle/Vundle.vim
 call vundle#begin()
@@ -18,6 +20,8 @@ Plugin 'vim-scripts/indentpython.vim'
 " 代码补全
 Bundle 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
+" letex
+Plugin 'LaTeX-Suite-aka-Vim-LaTeX'
 " 配色
 Plugin 'jnurmine/Zenburn' 
 " 主题美化插件
@@ -38,7 +42,8 @@ Plugin 'derekwyatt/vim-fswitch'
 Plugin 'scrooloose/nerdtree'
 " 多文件打开切换
 Plugin 'fholgado/minibufexpl.vim'
-
+" mac专用，自动输入法切换
+Plugin 'ybian/smartim'
 " All of your Plugins must be added before the following line
  call vundle#end()            " required
  filetype plugin indent on    " required
@@ -81,8 +86,6 @@ set incsearch
 set hlsearch
 " 搜索时大小写不敏感
 set ignorecase
-" 关闭兼容模式
-set nocompatible
 " vim 自身命令行模式智能补全
 set wildmenu
 " 总是显示状态栏
@@ -92,7 +95,7 @@ set ruler
 " 开启行号显示
 set number
 " 高亮显示当前行/列
-" set cursorline
+ set cursorline
 " 禁止折行
 set nowrap
 " 开启语法高亮功能
@@ -176,6 +179,14 @@ highlight BadWhitespace ctermbg=red guibg=red
 au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
 " Make trailing whitespace be flagged as bad.
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+"config letex
+let g:tex_flavor='latex'
+set grepprg=grep\ -nH\ $*
+set sw=2
+set iskeyword+=:
+nnoremap <leader>ll \ll
+nnoremap <leader>lv \lv
 
 "config youcompleteme
 "设置error和warning的提示符，如果没有设置，ycm会以syntastic的  
