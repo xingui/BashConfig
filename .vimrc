@@ -20,6 +20,9 @@ Plugin 'vim-scripts/indentpython.vim'
 " 代码补全
 Bundle 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
+" 代码高亮
+" Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'jeaye/color_coded'
 " letex
 Plugin 'LaTeX-Suite-aka-Vim-LaTeX'
 " 配色
@@ -42,7 +45,7 @@ Plugin 'derekwyatt/vim-fswitch'
 Plugin 'scrooloose/nerdtree'
 " 多文件打开切换
 Plugin 'fholgado/minibufexpl.vim'
-" mac专用，自动输入法切换
+" 自动输入法切换
 Plugin 'ybian/smartim'
 " All of your Plugins must be added before the following line
  call vundle#end()            " required
@@ -204,6 +207,10 @@ let g:ycm_server_keep_logfiles='~/.vim/bundle/YouCompleteMe/err.log'
 let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 "开启基于tag的补全，可以在这之后添加需要的标签路径  
 let g:ycm_collect_identifiers_from_tags_files = 1  
+" 语法关键字补全
+let g:ycm_seed_identifiers_with_syntax=1
+" 开启 YCM 标签补全引擎
+let g:ycm_collect_identifiers_from_tags_files=1
 "不显示开启vim时检查ycm_extra_conf文件的信息  
 let g:ycm_confirm_extra_conf=0  
 "开启语义补全  
@@ -212,8 +219,16 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_cache_omnifunc=0  
 "在注释中也可以补全  
 let g:ycm_complete_in_comments=1  
+"在字符串输入中也能补全
+let g:ycm_complete_in_strings = 1
 "输入第一个字符就开始补全  
 let g:ycm_min_num_of_chars_for_completion=1  
+
+" config for color_coded
+hi link StructDecl Type
+hi link UnionDecl Type
+hi link ClassDecl Type
+hi link EnumDecl Type
 
 let python_highlight_all=1
 
