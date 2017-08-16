@@ -127,6 +127,7 @@ set foldlevel=99
 " Enable folding with the spacebar 
 nnoremap <space> za
 nnoremap <leader>gb <C-O>  
+:map <F2> <C-W>f 
 " 开启自动缩进，set autoindent
 set ai
 " 显示输入的命令
