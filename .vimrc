@@ -21,10 +21,10 @@ Plugin 'vim-scripts/indentpython.vim'
 Bundle 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 " 代码高亮
-" Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'jeaye/color_coded'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+" Plugin 'jeaye/color_coded'
 " letex
-Plugin 'LaTeX-Suite-aka-Vim-LaTeX'
+" Plugin 'LaTeX-Suite-aka-Vim-LaTeX'
 " 配色
 Plugin 'jnurmine/Zenburn' 
 " 主题美化插件
@@ -45,8 +45,8 @@ Plugin 'derekwyatt/vim-fswitch'
 Plugin 'scrooloose/nerdtree'
 " 多文件打开切换
 Plugin 'fholgado/minibufexpl.vim'
-" 自动输入法切换
-Plugin 'ybian/smartim'
+" 自动输入法切换 for mac
+" Plugin 'ybian/smartim'
 " All of your Plugins must be added before the following line
  call vundle#end()            " required
  filetype plugin indent on    " required
@@ -98,7 +98,7 @@ set ruler
 " 开启行号显示
 set number
 " 高亮显示当前行/列
- set cursorline
+set cursorline
 " 禁止折行
 set nowrap
 " 开启语法高亮功能
@@ -153,45 +153,37 @@ set splitright
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
-" 清除vim退出的界面残留
-set term=xterm
+" 清除vim退出的界面残留 for mac
+" set term=xterm
 
 
 filetype plugin on
 "syn on
 
-let g:pydiction_location = '/home/jianzhong_teng/.vim/bundle/pydiction/complete-dict'
-let g:pydiction_menu_height = 3 
+let g:SimpylFold_docstring_preview=1
 
-
-
-au BufNewFile,BufRead *.py  set tabstop=4 
-au BufNewFile,BufRead *.py  set softtabstop=4
-au BufNewFile,BufRead *.py  set shiftwidth=4
-au BufNewFile,BufRead *.py  set textwidth=109
-au BufNewFile,BufRead *.py  set expandtab
-au BufNewFile,BufRead *.py  set autoindent
+au BufNewFile,BufRead *.py  set textwidth=110
 au BufNewFile,BufRead *.py  set fileformat=unix
 
 "au BufNewFile,BufRead *.py,*.c,*.h  TlistToggle
 
 " Use the below highlight group when displaying bad whitespace is desired.
-highlight BadWhitespace ctermbg=red guibg=red
+highlight BadWhitespace ctermbg=white guibg=red
 
-" Display tabs at the beginning of a line in Python mode as bad.
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
-" Make trailing whitespace be flagged as bad.
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" Display tabs at the beginning of a line in Python mode as bad. Make trailing whitespace be flagged as bad.
+au BufNewFile,BufRead *.c,*.h,*.py,*.pyw,*.cpp   set list listchars=tab:>-
+au BufNewFile,BufRead *.py,*.pyw,*.c,*.h,*.cpp match BadWhitespace /\s\+$\|^\t\+/
+"au BufNewFile,BufRead *.py,*.pyw,*.c,*.h,*.cpp match BadTab /^\t\+/
 
 "config letex
-let g:tex_flavor='latex'
-set grepprg=grep\ -nH\ $*
-set sw=2
-set iskeyword+=:
-nnoremap <leader>ll \ll
-nnoremap <leader>lv \lv
+" let g:tex_flavor='latex'
+" set grepprg=grep\ -nH\ $*
+" set sw=2
+" set iskeyword+=:
+" nnoremap <leader>ll \ll
+" nnoremap <leader>lv \lv
 
-"config youcompleteme
+"config for youcompleteme
 "设置error和warning的提示符，如果没有设置，ycm会以syntastic的  
 " g:syntastic_warning_symbol 和 g:syntastic_error_symbol 这两个为准  
 let g:ycm_error_symbol='>>'  
@@ -213,8 +205,6 @@ let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_collect_identifiers_from_tags_files=1
 "不显示开启vim时检查ycm_extra_conf文件的信息  
 let g:ycm_confirm_extra_conf=0  
-"开启语义补全  
-let g:ycm_seed_identifiers_with_syntax = 1  
 "每次重新生成匹配项，禁止缓存匹配项  
 let g:ycm_cache_omnifunc=0  
 "在注释中也可以补全  
@@ -225,10 +215,10 @@ let g:ycm_complete_in_strings = 1
 let g:ycm_min_num_of_chars_for_completion=1  
 
 " config for color_coded
-hi link StructDecl Type
-hi link UnionDecl Type
-hi link ClassDecl Type
-hi link EnumDecl Type
+" hi link StructDecl Type
+" hi link UnionDecl Type
+" hi link ClassDecl Type
+" hi link EnumDecl Type
 
 let python_highlight_all=1
 
