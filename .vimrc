@@ -30,7 +30,11 @@ Plugin 'jnurmine/Zenburn'
 " 主题美化插件
 Plugin 'altercation/vim-colors-solarized'
 " 状态栏插件，可以显示当前的虚拟环境、Git分支、正在编辑的文件等信息。
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" 多文件打开切换
+Plugin 'bling/vim-bufferline'
 " 符号自动补全，{} () []
 Plugin 'Raimondi/delimitMate'
 " 代码快速查找插件
@@ -47,6 +51,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'fholgado/minibufexpl.vim'
 " 自动输入法切换 for mac
 " Plugin 'ybian/smartim'
+ 
 " All of your Plugins must be added before the following line
  call vundle#end()            " required
  filetype plugin indent on    " required
@@ -99,6 +104,9 @@ set ruler
 set number
 " 高亮显示当前行/列
 set cursorline
+" 关闭叮叮声和闪屏
+set vb t_vb=
+au GuiEnter * set t_vb=
 " 禁止折行
 set nowrap
 " 开启语法高亮功能
@@ -136,6 +144,8 @@ set showcmd
 set noerrorbells
 " 开启可视化响铃，终端错误，屏幕闪烁
 set visualbell
+" 清除vim退出的界面残留
+" set term=xterm
 " 加载主题
 set background=dark
 colorscheme solarized
@@ -154,8 +164,20 @@ set splitright
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
-" 清除vim退出的界面残留 for mac
-" set term=xterm
+" 设置buf切换
+nnoremap <leader>1 :1b<CR>
+nnoremap <leader>2 :2b<CR>
+nnoremap <leader>3 :3b<CR>
+nnoremap <leader>4 :4b<CR>
+nnoremap <leader>5 :5b<CR>
+nnoremap <leader>6 :6b<CR>
+nnoremap <leader>7 :7b<CR>
+nnoremap <leader>8 :8b<CR>
+nnoremap <leader>9 :9b<CR>
+nnoremap <leader>wl :bn<CR>
+nnoremap <leader>wh :bp<CR>
+nnoremap <leader>ww :b#<CR>
+
 
 
 filetype plugin on
@@ -169,13 +191,30 @@ au BufNewFile,BufRead *.py  set fileformat=unix
 "au BufNewFile,BufRead *.py,*.c,*.h  TlistToggle
 
 " Use the below highlight group when displaying bad whitespace is desired.
-highlight BadWhitespace ctermbg=white guibg=red
+highlight BadWhitespace ctermbg=red guibg=red
 
 " Display tabs at the beginning of a line in Python mode as bad. Make trailing whitespace be flagged as bad.
-au BufNewFile,BufRead *.c,*.h,*.py,*.pyw,*.cpp   set list listchars=tab:>-
+au BufNewFile,BufRead *.c,*.h,*.py,*.pyw,*.cpp set list listchars=tab:>-
 au BufNewFile,BufRead *.py,*.pyw,*.c,*.h,*.cpp match BadWhitespace /\s\+$\|^\t\+/
 "au BufNewFile,BufRead *.py,*.pyw,*.c,*.h,*.cpp match BadTab /^\t\+/
 
+" airline config
+" 开启tabline
+" let g:airline#extensions#tabline#enabled = 1
+" tabline中当前buffer两端的分隔符
+" let g:airline#extensions#tabline#left_sep = ' '
+"" tabline为激活的buffer的两端字符
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+" tabline中buffer显示编号
+" let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_theme = 'powerlineish'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#buffline#enabled = 1
+let g:airline#extensions#bufferline#overwrite_variables = 1
+let g:bufferline_echo = 0
+let g:bufferline_active_buffer_left = '['
+let g:bufferline_active_buffer_right = ']'
+let g:bufferline_modified = '+'
 "config letex
 " let g:tex_flavor='latex'
 " set grepprg=grep\ -nH\ $*
@@ -188,7 +227,7 @@ au BufNewFile,BufRead *.py,*.pyw,*.c,*.h,*.cpp match BadWhitespace /\s\+$\|^\t\+
 "设置error和warning的提示符，如果没有设置，ycm会以syntastic的  
 " g:syntastic_warning_symbol 和 g:syntastic_error_symbol 这两个为准  
 let g:ycm_error_symbol='>>'  
-let g:ycm_warning_symbol='>*'  
+let g:ycm_warning_symbol='>*'
 "设置跳转的快捷键，可以跳转到definition和declaration  
 nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>  
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>  
@@ -249,6 +288,7 @@ let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
 
 " 显示/隐藏 MiniBufExplorer 窗口
+let g:miniBufExplorerAutoStart = 0
 map <Leader>bl :MBEToggle<cr>
 " buffer 切换快捷键
 map <Leader>t :MBEbn<cr>
@@ -284,4 +324,3 @@ nnoremap <Leader>rc :call Replace(1, 0, input('Replace '.expand('<cword>').' wit
 " 确认、整词
 nnoremap <Leader>rcw :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
 nnoremap <Leader>rwc :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
-
