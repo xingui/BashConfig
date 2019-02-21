@@ -136,6 +136,11 @@ set foldlevel=99
 nnoremap <space> za
 nnoremap <leader>gb <C-O>  
 :map <F2> <C-W>f 
+:map <F3> :vertical wincmd f<CR>
+:map <F4> :set wrap<CR>
+:map <F5> :set nowrap<CR>
+:map <F6> :set paste<CR>
+:map <F7> :set nopaste<CR>
 " 开启自动缩进，set autoindent
 set ai
 " 显示输入的命令
